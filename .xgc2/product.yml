@@ -1,7 +1,7 @@
 schema: xgc2.product.v1
 id: xgc2-scout-description
 name: XGC2 Scout Description
-version: 0.4.10-8
+version: 0.4.10-9
 kind: ros1-apt
 summary: ROS Noetic AgileX Scout description meshes, URDF, and launch assets.
 ros:
@@ -32,3 +32,6 @@ usage:
 ownership:
   paths:
   - /opt/ros/noetic/share/scout_description
+release:
+  apt_versions:
+    focal: 0.4.10-9
