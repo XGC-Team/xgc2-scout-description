@@ -16,6 +16,8 @@
     <xacro:arg name="wheel_contact_slip1" default="0.0" />
     <xacro:arg name="wheel_contact_slip2" default="0.1" />
     <xacro:arg name="skid_steer_torque" default="1000" />
+    <xacro:arg name="wheelbase" default="0.451" />
+    <xacro:arg name="wheel_track" default="0.490" />
 
     <xacro:include filename="$(find scout_description)/urdf/scout_mini_wheel_1.xacro" />
     <xacro:include filename="$(find scout_description)/urdf/scout_mini_wheel_2.xacro" />
@@ -30,8 +32,8 @@
     <xacro:property name="base_y_size" value="0.585000" />
     <xacro:property name="base_z_size" value="0.235000" />
 
-    <xacro:property name="wheelbase" value="0.463951"/>
-    <xacro:property name="track" value="0.416503"/>
+    <xacro:property name="wheelbase" value="$(arg wheelbase)"/>
+    <xacro:property name="track" value="$(arg wheel_track)"/>
     <xacro:property name="wheel_vertical_offset" value="-0.100998" />
 
     <xacro:property name="wheel_diameter" value="0.16" />
