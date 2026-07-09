@@ -41,7 +41,7 @@
             <visualize>false</visualize>
             <plugin name="imu_plugin" filename="libgazebo_ros_imu_sensor.so">
                 <robotNamespace>$(arg ns)</robotNamespace>
-                <topicName>imu</topicName>
+                <topicName>imu/data_raw</topicName>
                 <frameName>$(arg frame_prefix)imu_link</frameName>
                 <updateRateHZ>100.0</updateRateHZ>
                 <gaussianNoise>0.0002</gaussianNoise>
