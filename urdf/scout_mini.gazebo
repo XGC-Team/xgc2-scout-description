@@ -4,10 +4,10 @@
 <robot xmlns:xacro="http://ros.org/wiki/xacro">
     <xacro:macro name="scout_wheel_contact" params="link_name">
         <gazebo reference="${link_name}">
-            <mu1 value="1.0"/>
+            <mu1 value="$(arg wheel_contact_mu1)"/>
             <mu2 value="$(arg wheel_contact_mu2)"/>
-            <fdir1 value="1 0 0"/>
-            <slip1 value="0.0"/>
+            <fdir1 value="$(arg wheel_contact_fdir1)"/>
+            <slip1 value="$(arg wheel_contact_slip1)"/>
             <slip2 value="$(arg wheel_contact_slip2)"/>
             <kp value="1000000.0"/>
             <kd value="1.0"/>
