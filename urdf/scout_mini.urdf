@@ -359,4 +359,24 @@
             <robotBaseFrame>base_footprint</robotBaseFrame>
         </plugin>
     </gazebo> -->
+
+  <!-- Payload box. The visualiser has always published base_link -> box_link and
+       drawn this mesh itself; describing it here instead lets the one URDF be the
+       whole robot, so a viewer that loads the description needs nothing else. The
+       joint carries the yaw the visualiser applied to the frame, and the visual
+       carries the yaw it applied to the mesh; the two compose to the same pose the
+       scene used to send in world coordinates. -->
+  <link name="box_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 3.14"/>
+      <geometry>
+        <mesh filename="package://scout_description/meshes/box_link.STL"/>
+      </geometry>
+    </visual>
+  </link>
+  <joint name="box_joint" type="fixed">
+    <origin xyz="0 0 0.055" rpy="0 0 3.14"/>
+    <parent link="base_link"/>
+    <child link="box_link"/>
+  </joint>
 </robot>
