@@ -56,6 +56,7 @@
     <xacro:scout_wheel_contact link_name="rear_left_wheel_link"/>
     <xacro:scout_wheel_contact link_name="rear_right_wheel_link"/>
 
+    <xacro:if value="$(arg enable_lidar)">
         <gazebo reference="laser_link">
             <sensor type="ray" name="laser_sensor">
               <pose>0 0 0 0 0 0</pose>
@@ -87,8 +88,10 @@
                 <frameName>$(arg frame_prefix)laser_link</frameName>
               </plugin>
             </sensor>
-          </gazebo>
+        </gazebo>
+    </xacro:if>
 
+    <xacro:if value="$(arg enable_camera)">
         <gazebo reference="camera_link">
           <sensor name="sensor_camera" type="depth">
             <pose>0.0 0.0 0.0 0.0 0.0 0.0</pose>
@@ -135,7 +138,8 @@
               <hackBaseline>0</hackBaseline>
             </plugin>
         </sensor>
-          </gazebo>
+        </gazebo>
+    </xacro:if>
 
     <xacro:if value="$(arg use_skid_steer_plugin)">
     <gazebo>

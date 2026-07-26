@@ -50,6 +50,19 @@ def attributes(element: ET.Element, path: str) -> dict[str, str]:
 
 
 class ScoutVisualAssetsTest(unittest.TestCase):
+    def test_gazebo_sensors_are_independently_gated_and_disabled_by_default(self) -> None:
+        model = (PACKAGE / "urdf" / "mini.xacro").read_text()
+        launch = (PACKAGE / "launch" / "mini_description.launch").read_text()
+        gazebo = (PACKAGE / "urdf" / "scout_mini.gazebo").read_text()
+
+        for name in ("enable_lidar", "enable_camera"):
+            self.assertIn(f'<xacro:arg name="{name}" default="false" />', model)
+            self.assertIn(f'<arg name="{name}" default="false"/>', launch)
+            self.assertIn(f"{name}:=$(arg {name})", launch)
+            self.assertEqual(gazebo.count(f'<xacro:if value="$(arg {name})">'), 1)
+        self.assertEqual(gazebo.count('name="laser_sensor"'), 1)
+        self.assertEqual(gazebo.count('name="sensor_camera"'), 1)
+
     def test_viewer_visuals_and_origins_match_gazebo_urdf(self) -> None:
         gazebo = ET.parse(PACKAGE / "urdf" / "scout_mini.urdf").getroot()
         viewer = ET.parse(PACKAGE / "urdf" / "scout_visual.urdf").getroot()
