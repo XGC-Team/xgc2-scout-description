@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+<!-- Viewer-only Scout Mini. Every visual mesh and origin below mirrors
+     scout_mini.urdf, which is also the Gazebo model. Collision, inertial,
+     sensor, and transmission elements are intentionally omitted. -->
+<robot name="xgc2_scout_mini_visual">
+  <material name="scout_payload_white">
+    <color rgba="1 1 1 1"/>
+  </material>
+
+  <link name="base_link">
+    <visual>
+      <origin xyz="0 0 0.0" rpy="1.57 0 -1.57"/>
+      <geometry>
+        <mesh filename="package://scout_description/meshes/scout_mini_base_link2.dae"/>
+      </geometry>
+    </visual>
+  </link>
+
+  <link name="box_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 3.14"/>
+      <geometry>
+        <mesh filename="package://scout_description/meshes/box_link.STL"/>
+      </geometry>
+      <material name="scout_payload_white"/>
+    </visual>
+  </link>
+  <joint name="box_joint" type="fixed">
+    <origin xyz="0 0 0.055" rpy="0 0 3.14"/>
+    <parent link="base_link"/>
+    <child link="box_link"/>
+  </joint>
+
+  <link name="front_left_wheel_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://scout_description/meshes/wheel.dae"/>
+      </geometry>
+    </visual>
+  </link>
+  <joint name="front_left_wheel" type="continuous">
+    <origin xyz="0.2319755 0.2082515 -0.100998" rpy="-1.57 0 0"/>
+    <parent link="base_link"/>
+    <child link="front_left_wheel_link"/>
+    <axis xyz="0 0 -1"/>
+  </joint>
+
+  <link name="front_right_wheel_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://scout_description/meshes/wheel.dae"/>
+      </geometry>
+    </visual>
+  </link>
+  <joint name="front_right_wheel" type="continuous">
+    <origin xyz="0.2319755 -0.2082515 -0.099998" rpy="1.57 0 0"/>
+    <parent link="base_link"/>
+    <child link="front_right_wheel_link"/>
+    <axis xyz="0 0 -1"/>
+  </joint>
+
+  <link name="rear_left_wheel_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://scout_description/meshes/wheel.dae"/>
+      </geometry>
+    </visual>
+  </link>
+  <joint name="rear_left_wheel" type="continuous">
+    <origin xyz="-0.2319755 0.2082515 -0.100998" rpy="-1.57 0 0"/>
+    <parent link="base_link"/>
+    <child link="rear_left_wheel_link"/>
+    <axis xyz="0 0 -1"/>
+  </joint>
+
+  <link name="rear_right_wheel_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://scout_description/meshes/wheel.dae"/>
+      </geometry>
+    </visual>
+  </link>
+  <joint name="rear_right_wheel" type="continuous">
+    <origin xyz="-0.2319755 -0.2082515 -0.099998" rpy="1.57 0 0"/>
+    <parent link="base_link"/>
+    <child link="rear_right_wheel_link"/>
+    <axis xyz="0 0 -1"/>
+  </joint>
+</robot>
