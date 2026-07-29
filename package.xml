@@ -24,6 +24,12 @@
   <run_depend>urdf</run_depend>
   <run_depend>xacro</run_depend>
   <run_depend>lms1xx</run_depend>
+  <run_depend>gazebo_ros</run_depend>
+  <run_depend>joint_state_publisher_gui</run_depend>
+  <run_depend>robot_state_publisher</run_depend>
+  <run_depend>rostopic</run_depend>
+  <run_depend>rviz</run_depend>
+  <run_depend>tf</run_depend>
 
   <export>
   </export>

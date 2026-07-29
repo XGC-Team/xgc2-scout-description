@@ -1,6 +1,5 @@
 <?xml version="1.0"?>
 <launch>
-  <arg name="model" />
   <arg name="gui"  default="False" />
   <!-- Loading model files -->
   <param  name="robot_description"  textfile="$(find scout_description)/urdf/scout_mini.urdf" />
