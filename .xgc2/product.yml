@@ -1,43 +1,46 @@
 schema: xgc2.product.v1
-id: xgc2-scout-description
-name: XGC2 Scout Description
-version: 0.4.10-14
-kind: ros1-apt
-summary: ROS Noetic visual-only AgileX Scout meshes and URDF.
+id: xgc2-ros-jazzy-scout-description
+name: XGC2 ROS Jazzy Scout Description
+version: 0.4.10-1
+kind: ros2-apt
+summary: ROS 2 Jazzy visual-only AgileX Scout meshes and URDF.
 ros:
-  distro: noetic
+  distro: jazzy
   packages:
   - scout_description
 apt:
-  distribution: focal
+  distribution: noble
   install:
-  - ros-noetic-xgc2-scout-description
+  - ros-jazzy-xgc2-scout-description
   packages:
-  - ros-noetic-xgc2-scout-description
+  - ros-jazzy-xgc2-scout-description
   package_architectures:
-    ros-noetic-xgc2-scout-description:
+    ros-jazzy-xgc2-scout-description:
     - amd64
     - arm64
   depends:
-  - ros-noetic-urdf
+  - ros-jazzy-urdf
 usage:
   install: 'sudo apt update
 
-    sudo apt install ros-noetic-xgc2-scout-description
+    sudo apt install ros-jazzy-xgc2-scout-description
 
     '
-  smoke_test: 'test -f "$(rospack find scout_description)/urdf/scout_visual.urdf"
+  smoke_test: 'source /opt/ros/jazzy/setup.bash
 
-    test ! -d "$(rospack find scout_description)/launch"
+    ros2 pkg prefix scout_description
+
+    test -f /opt/ros/jazzy/share/scout_description/urdf/scout_visual.urdf
 
     '
 ownership:
   paths:
-  - /opt/ros/noetic/share/scout_description
+  - /opt/ros/jazzy/share/scout_description
+  - /opt/ros/jazzy/share/ament_index/resource_index/packages/scout_description
 release:
   repository: lxk36/xgc2-scout-description
-  ref: noetic
+  ref: jazzy
   workflow: release.yml
   ci_workflow: ci.yml
   apt_versions:
-    focal: 0.4.10-14
+    noble: 0.4.10-1

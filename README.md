@@ -2,6 +2,8 @@
 
 Visual-only AgileX Scout model shared by ROS visualizers and simulation packages.
 
+This branch targets ROS 2 Jazzy on Ubuntu Noble and builds with `ament_cmake`.
+
 The ROS package name is permanently `scout_description`. Its public runtime
 contract is limited to:
 

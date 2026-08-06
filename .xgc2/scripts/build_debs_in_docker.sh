@@ -4,7 +4,7 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "${SCRIPT_DIR}/../.." && pwd)"
 
-DOCKER_IMAGE="${DOCKER_IMAGE:-ros:noetic-ros-base-focal}"
+DOCKER_IMAGE="${DOCKER_IMAGE:-ros:jazzy-ros-base-noble}"
 WORK_DIR="${WORK_DIR:-${REPO_ROOT}/.work/docker}"
 OUTPUT_DIR="${OUTPUT_DIR:-${REPO_ROOT}/debs}"
 INSTALL_CHECK="${INSTALL_CHECK:-true}"
@@ -58,25 +58,28 @@ docker run --rm \
       file \
       git \
       rsync \
-      ros-noetic-rospack \
-      ros-noetic-urdf
+      python3-colcon-common-extensions \
+      ros-jazzy-ament-cmake \
+      ros-jazzy-ament-cmake-pytest \
+      ros-jazzy-urdf
 
-    rm -rf /workspace/work/src /workspace/work/build /workspace/work/devel /workspace/work/install-root
-    mkdir -p /workspace/work/src/scout_description
-    rsync -a --delete /workspace/repo/ /workspace/work/src/scout_description/
+    rm -rf /workspace/work/build /workspace/work/install-root
+    mkdir -p /workspace/work/build
 
-    cd /workspace/work
-    source /opt/ros/noetic/setup.bash
-    DESTDIR=/workspace/work/install-root catkin_make install \
-      -DCMAKE_INSTALL_PREFIX=/opt/ros/noetic \
-      -DCATKIN_ENABLE_TESTING=OFF
+    set +u
+    source /opt/ros/jazzy/setup.bash
+    set -u
+    cmake -S /workspace/repo -B /workspace/work/build \
+      -DCMAKE_INSTALL_PREFIX=/opt/ros/jazzy \
+      -DBUILD_TESTING=OFF
+    DESTDIR=/workspace/work/install-root cmake --install /workspace/work/build
 
     /workspace/repo/.xgc2/scripts/package_debs.sh \
       --install-root /workspace/work/install-root \
       --output-dir /workspace/out
 
     if [[ "${INSTALL_CHECK}" == "true" ]]; then
-      apt-get install -y /workspace/out/ros-noetic-xgc2-scout-description_*.deb
+      apt-get install -y /workspace/out/ros-jazzy-xgc2-scout-description_*.deb
       /workspace/repo/.xgc2/scripts/check_installed_packages.sh
     fi
   '

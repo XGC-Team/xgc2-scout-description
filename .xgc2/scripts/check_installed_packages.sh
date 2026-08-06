@@ -1,11 +1,14 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-ROS_DISTRO="${ROS_DISTRO:-noetic}"
+ROS_DISTRO="${ROS_DISTRO:-jazzy}"
+set +u
 source "/opt/ros/${ROS_DISTRO}/setup.bash"
+set -u
 
-dpkg -s ros-noetic-xgc2-scout-description >/dev/null
-test "$(rospack find scout_description)" = "/opt/ros/${ROS_DISTRO}/share/scout_description"
+dpkg -s ros-jazzy-xgc2-scout-description >/dev/null
+test "$(ros2 pkg prefix scout_description)" = "/opt/ros/${ROS_DISTRO}"
+test -f "/opt/ros/${ROS_DISTRO}/share/ament_index/resource_index/packages/scout_description"
 test -f "/opt/ros/${ROS_DISTRO}/share/scout_description/meshes/scout_mini_base_link2.dae"
 test -f "/opt/ros/${ROS_DISTRO}/share/scout_description/meshes/wheel.dae"
 test -f "/opt/ros/${ROS_DISTRO}/share/scout_description/urdf/scout_visual.urdf"
