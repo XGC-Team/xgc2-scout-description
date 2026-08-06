@@ -1,7 +1,6 @@
 <?xml version="1.0"?>
-<!-- Viewer-only Scout Mini. Every visual mesh and origin below mirrors
-     scout_mini.urdf, which is also the Gazebo model. Collision, inertial,
-     sensor, and transmission elements are intentionally omitted. -->
+<!-- Viewer-only Scout Mini. Collision, inertial, sensor, Gazebo plugin, and
+     transmission elements are intentionally owned by simulation packages. -->
 <robot name="xgc2_scout_mini_visual">
   <material name="scout_payload_white">
     <color rgba="1 1 1 1"/>

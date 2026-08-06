@@ -1,9 +1,9 @@
 schema: xgc2.product.v1
 id: xgc2-scout-description
 name: XGC2 Scout Description
-version: 0.4.10-13
+version: 0.4.10-14
 kind: ros1-apt
-summary: ROS Noetic AgileX Scout description meshes, URDF, and launch assets.
+summary: ROS Noetic visual-only AgileX Scout meshes and URDF.
 ros:
   distro: noetic
   packages:
@@ -14,24 +14,30 @@ apt:
   - ros-noetic-xgc2-scout-description
   packages:
   - ros-noetic-xgc2-scout-description
+  package_architectures:
+    ros-noetic-xgc2-scout-description:
+    - amd64
+    - arm64
   depends:
-  - ros-noetic-lms1xx
   - ros-noetic-urdf
-  - ros-noetic-xacro
 usage:
   install: 'sudo apt update
 
     sudo apt install ros-noetic-xgc2-scout-description
 
     '
-  smoke_test: 'rospack find scout_description
+  smoke_test: 'test -f "$(rospack find scout_description)/urdf/scout_visual.urdf"
 
-    roslaunch --files scout_description mini_description.launch
+    test ! -d "$(rospack find scout_description)/launch"
 
     '
 ownership:
   paths:
   - /opt/ros/noetic/share/scout_description
 release:
+  repository: lxk36/xgc2-scout-description
+  ref: noetic
+  workflow: release.yml
+  ci_workflow: ci.yml
   apt_versions:
-    focal: 0.4.10-13
+    focal: 0.4.10-14

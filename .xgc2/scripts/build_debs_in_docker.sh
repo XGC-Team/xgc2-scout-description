@@ -58,11 +58,8 @@ docker run --rm \
       file \
       git \
       rsync \
-      ros-noetic-lms1xx \
-      ros-noetic-roslaunch \
       ros-noetic-rospack \
-      ros-noetic-urdf \
-      ros-noetic-xacro
+      ros-noetic-urdf
 
     rm -rf /workspace/work/src /workspace/work/build /workspace/work/devel /workspace/work/install-root
     mkdir -p /workspace/work/src/scout_description

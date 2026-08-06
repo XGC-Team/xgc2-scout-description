@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Guard the Scout viewer model against drifting from the Gazebo model."""
+"""Enforce the Scout description package's visual-only contract."""
 
 from __future__ import annotations
 
@@ -11,96 +11,63 @@ from pathlib import Path
 
 PACKAGE = Path(__file__).resolve().parents[1]
 COLLADA = {"c": "http://www.collada.org/2005/11/COLLADASchema"}
-VISUAL_LINKS = (
-    "base_link",
-    "box_link",
-    "front_left_wheel_link",
-    "front_right_wheel_link",
-    "rear_left_wheel_link",
-    "rear_right_wheel_link",
-)
-JOINTS = (
-    "box_joint",
-    "front_left_wheel",
-    "front_right_wheel",
-    "rear_left_wheel",
-    "rear_right_wheel",
-)
 VIEWER_VISUAL_ASSET_SHA256 = {
     "box_link.STL": "033cd0ce9f4661576e3ba42fdabb3fd2d630c472d6057ae421793090638b6ec3",
     "scout_mini_base_link.STL": "13a164aadf1b0a2c20327941fd31db091f30d16ca1b50aa74a41e3d35f8417a9",
-    # Gazebo geometry and diffuse materials, with only white specular highlights disabled.
     "scout_mini_base_link2.dae": "3db98aba69d8ba26e1c2177646ba2a12c6725ff9dc99efe06cf4d2be87f23204",
     "wheel.dae": "c64ae34e44118f07d718d54199107ce430a006d1cd9fd96bb80968954b5a8ce7",
 }
 
 
-def element_by_name(root: ET.Element, tag: str, name: str) -> ET.Element:
-    element = root.find(f"./{tag}[@name='{name}']")
-    if element is None:
-        raise AssertionError(f"missing {tag} {name}")
-    return element
-
-
-def attributes(element: ET.Element, path: str) -> dict[str, str]:
-    child = element.find(path)
-    if child is None:
-        raise AssertionError(f"missing {path} below {element.tag} {element.attrib}")
-    return child.attrib
-
-
 class ScoutVisualAssetsTest(unittest.TestCase):
-    def test_gazebo_sensors_are_independently_gated_and_disabled_by_default(self) -> None:
-        model = (PACKAGE / "urdf" / "mini.xacro").read_text()
-        launch = (PACKAGE / "launch" / "mini_description.launch").read_text()
-        gazebo = (PACKAGE / "urdf" / "scout_mini.gazebo").read_text()
+    def test_repository_boundary_is_visual_only(self) -> None:
+        self.assertFalse((PACKAGE / "launch").exists())
+        self.assertFalse((PACKAGE / "rviz").exists())
+        self.assertEqual(
+            [path.name for path in sorted((PACKAGE / "urdf").iterdir())],
+            ["scout_visual.urdf"],
+        )
 
-        for name in ("enable_lidar", "enable_camera"):
-            self.assertIn(f'<xacro:arg name="{name}" default="false" />', model)
-            self.assertIn(f'<arg name="{name}" default="false"/>', launch)
-            self.assertIn(f"{name}:=$(arg {name})", launch)
-            self.assertEqual(gazebo.count(f'<xacro:if value="$(arg {name})">'), 1)
-        self.assertEqual(gazebo.count('name="laser_sensor"'), 1)
-        self.assertEqual(gazebo.count('name="sensor_camera"'), 1)
+    def test_visual_urdf_has_no_simulation_or_physics_elements(self) -> None:
+        path = PACKAGE / "urdf" / "scout_visual.urdf"
+        root = ET.parse(path).getroot()
+        forbidden_tags = {
+            "collision",
+            "gazebo",
+            "inertial",
+            "plugin",
+            "sensor",
+            "transmission",
+        }
+        present = {element.tag.rsplit("}", 1)[-1] for element in root.iter()}
+        self.assertTrue(forbidden_tags.isdisjoint(present), sorted(forbidden_tags & present))
+        self.assertTrue(root.findall(".//visual"))
+        self.assertTrue(root.findall(".//mesh"))
 
-    def test_viewer_visuals_and_origins_match_gazebo_urdf(self) -> None:
-        gazebo = ET.parse(PACKAGE / "urdf" / "scout_mini.urdf").getroot()
-        viewer = ET.parse(PACKAGE / "urdf" / "scout_visual.urdf").getroot()
+        for mesh in root.findall(".//mesh"):
+            uri = mesh.attrib["filename"]
+            prefix = "package://scout_description/meshes/"
+            self.assertTrue(uri.startswith(prefix), uri)
+            self.assertTrue((PACKAGE / "meshes" / uri[len(prefix) :]).is_file(), uri)
 
-        for name in VISUAL_LINKS:
-            expected = element_by_name(gazebo, "link", name)
-            actual = element_by_name(viewer, "link", name)
-            self.assertEqual(
-                attributes(actual, "./visual/origin"),
-                attributes(expected, "./visual/origin"),
-                name,
-            )
-            self.assertEqual(
-                attributes(actual, "./visual/geometry/mesh"),
-                attributes(expected, "./visual/geometry/mesh"),
-                name,
-            )
+    def test_manifest_has_no_simulation_or_runtime_bringup_dependencies(self) -> None:
+        text = (PACKAGE / "package.xml").read_text()
+        for dependency in (
+            "gazebo_ros",
+            "lms1xx",
+            "robot_state_publisher",
+            "roslaunch",
+            "rviz",
+            "xacro",
+        ):
+            self.assertNotIn(f">{dependency}<", text)
 
-        for name in JOINTS:
-            expected = element_by_name(gazebo, "joint", name)
-            actual = element_by_name(viewer, "joint", name)
-            self.assertEqual(attributes(actual, "./origin"), attributes(expected, "./origin"), name)
-            self.assertEqual(attributes(actual, "./parent"), attributes(expected, "./parent"), name)
-            self.assertEqual(attributes(actual, "./child"), attributes(expected, "./child"), name)
-
-        self.assertFalse(viewer.findall(".//visual/geometry/box"))
-        self.assertFalse(viewer.findall(".//visual/geometry/cylinder"))
-
-    def test_visual_assets_are_the_expected_full_detail_viewer_assets(self) -> None:
+    def test_visual_assets_are_the_expected_full_detail_assets(self) -> None:
         for filename, expected_digest in VIEWER_VISUAL_ASSET_SHA256.items():
             path = PACKAGE / "meshes" / filename
-            self.assertEqual(
-                hashlib.sha256(path.read_bytes()).hexdigest(),
-                expected_digest,
-                filename,
-            )
+            self.assertEqual(hashlib.sha256(path.read_bytes()).hexdigest(), expected_digest, filename)
 
-    def test_dae_keeps_all_gazebo_faces_materials_and_frame(self) -> None:
+    def test_dae_keeps_all_faces_materials_and_frame(self) -> None:
         expectations = {
             "scout_mini_base_link2.dae": {
                 "triangles": 193_648,
@@ -123,8 +90,7 @@ class ScoutVisualAssetsTest(unittest.TestCase):
             },
         }
         for filename, expected in expectations.items():
-            path = PACKAGE / "meshes" / filename
-            root = ET.parse(path).getroot()
+            root = ET.parse(PACKAGE / "meshes" / filename).getroot()
             self.assertEqual(root.findtext("c:asset/c:up_axis", namespaces=COLLADA), "Z_UP")
             self.assertEqual(
                 sum(int(element.attrib["count"]) for element in root.findall(".//c:triangles", COLLADA)),
@@ -140,7 +106,7 @@ class ScoutVisualAssetsTest(unittest.TestCase):
             }
             self.assertTrue(expected["required_diffuse"].issubset(diffuse), filename)
 
-    def test_dae_keeps_diffuse_colors_without_specular_reflections(self) -> None:
+    def test_dae_has_no_specular_reflections(self) -> None:
         for filename, expected_effects in {
             "scout_mini_base_link2.dae": 54,
             "wheel.dae": 7,
@@ -156,16 +122,6 @@ class ScoutVisualAssetsTest(unittest.TestCase):
                 )
                 self.assertEqual(
                     (effect.findtext(".//c:shininess/c:float", namespaces=COLLADA) or "").strip(),
-                    "0.0",
-                    filename,
-                )
-                self.assertEqual(
-                    (effect.findtext(".//c:reflective/c:color", namespaces=COLLADA) or "").strip(),
-                    "0.0 0.0 0.0 1.0",
-                    filename,
-                )
-                self.assertEqual(
-                    (effect.findtext(".//c:reflectivity/c:float", namespaces=COLLADA) or "").strip(),
                     "0.0",
                     filename,
                 )

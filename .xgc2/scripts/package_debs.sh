@@ -71,8 +71,8 @@ Section: misc
 Priority: optional
 Architecture: ${ARCH}
 Maintainer: XGC2 <apt@example.com>
-Depends: ros-${ROS_DISTRO}-lms1xx, ros-${ROS_DISTRO}-urdf, ros-${ROS_DISTRO}-xacro
-Description: XGC2 Scout description assets
+Depends: ros-${ROS_DISTRO}-urdf
+Description: XGC2 Scout visual-only description assets
 EOF
 
 printf '%s package\n' "${PACKAGE}" > "${PKG_ROOT}/usr/share/doc/${PACKAGE}/README"
