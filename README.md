@@ -2,6 +2,8 @@
 
 Visual-only AgileX Scout model shared by ROS visualizers and simulation packages.
 
+This branch targets ROS Melodic on Ubuntu Bionic and builds with `catkin`.
+
 The ROS package name is permanently `scout_description`. Its public runtime
 contract is limited to:
 

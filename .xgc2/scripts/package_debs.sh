@@ -3,14 +3,14 @@ set -euo pipefail
 
 INSTALL_ROOT=""
 OUTPUT_DIR=""
-ROS_DISTRO="${ROS_DISTRO:-noetic}"
+ROS_DISTRO="${ROS_DISTRO:-melodic}"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "${SCRIPT_DIR}/../.." && pwd)"
 PACKAGE="ros-${ROS_DISTRO}-xgc2-scout-description"
 ROS_PACKAGE="scout_description"
 
 product_version() {
-  awk -F': *' '/^version:[[:space:]]*/ {print $2; exit}' "${REPO_ROOT}/.xgc2/product.yml"
+  awk -F': *' '/^version:/ {print $2; exit}' "${REPO_ROOT}/.xgc2/product.yml"
 }
 
 VERSION="${PACKAGE_VERSION:-$(product_version)}"

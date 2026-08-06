@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-ROS_DISTRO="${ROS_DISTRO:-noetic}"
+ROS_DISTRO="${ROS_DISTRO:-melodic}"
 source "/opt/ros/${ROS_DISTRO}/setup.bash"
 
-dpkg -s ros-noetic-xgc2-scout-description >/dev/null
+dpkg -s "ros-${ROS_DISTRO}-xgc2-scout-description" >/dev/null
 test "$(rospack find scout_description)" = "/opt/ros/${ROS_DISTRO}/share/scout_description"
 test -f "/opt/ros/${ROS_DISTRO}/share/scout_description/meshes/scout_mini_base_link2.dae"
 test -f "/opt/ros/${ROS_DISTRO}/share/scout_description/meshes/wheel.dae"

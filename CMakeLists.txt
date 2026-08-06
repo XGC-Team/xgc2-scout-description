@@ -6,10 +6,13 @@ find_package(catkin REQUIRED)
 catkin_package()
 
 if(CATKIN_ENABLE_TESTING)
-  find_package(PythonInterp REQUIRED)
+  find_program(SCOUT_PYTHON3_EXECUTABLE NAMES python3)
+  if(NOT SCOUT_PYTHON3_EXECUTABLE)
+    message(FATAL_ERROR "python3 is required to test scout_description")
+  endif()
   add_test(
     NAME scout_visual_assets
-    COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/test/test_visual_assets.py
+    COMMAND ${SCOUT_PYTHON3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/test/test_visual_assets.py
   )
 endif()
 

@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
 """Enforce the Scout description package's visual-only contract."""
 
-from __future__ import annotations
-
 import hashlib
 import unittest
 import xml.etree.ElementTree as ET

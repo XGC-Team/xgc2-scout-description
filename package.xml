@@ -2,7 +2,7 @@
 <package format="2">
   <name>scout_description</name>
   <version>0.4.10</version>
-  <description>Visual-only AgileX Scout description meshes and URDF.</description>
+  <description>ROS Melodic visual-only AgileX Scout description meshes and URDF.</description>
 
   <author email="rgariepy@clearpathrobotics.com">Ryan Gariepy</author>
   <author email="pmukherj@clearpathrobotics.com">Prasenjit Mukherjee</author>

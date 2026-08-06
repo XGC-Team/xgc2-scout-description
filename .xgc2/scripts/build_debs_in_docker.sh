@@ -4,7 +4,7 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "${SCRIPT_DIR}/../.." && pwd)"
 
-DOCKER_IMAGE="${DOCKER_IMAGE:-ros:noetic-ros-base-focal}"
+DOCKER_IMAGE="${DOCKER_IMAGE:-ros:melodic-ros-base-bionic}"
 WORK_DIR="${WORK_DIR:-${REPO_ROOT}/.work/docker}"
 OUTPUT_DIR="${OUTPUT_DIR:-${REPO_ROOT}/debs}"
 INSTALL_CHECK="${INSTALL_CHECK:-true}"
@@ -57,27 +57,35 @@ docker run --rm \
       fakeroot \
       file \
       git \
+      python3 \
       rsync \
-      ros-noetic-rospack \
-      ros-noetic-urdf
+      ros-melodic-rospack \
+      ros-melodic-urdf
 
     rm -rf /workspace/work/src /workspace/work/build /workspace/work/devel /workspace/work/install-root
     mkdir -p /workspace/work/src/scout_description
     rsync -a --delete /workspace/repo/ /workspace/work/src/scout_description/
 
     cd /workspace/work
-    source /opt/ros/noetic/setup.bash
+    source /opt/ros/melodic/setup.bash
+    catkin_make \
+      -DCMAKE_INSTALL_PREFIX=/opt/ros/melodic \
+      -DCATKIN_ENABLE_TESTING=ON
+    (cd /workspace/work/build && ctest --output-on-failure)
     DESTDIR=/workspace/work/install-root catkin_make install \
-      -DCMAKE_INSTALL_PREFIX=/opt/ros/noetic \
-      -DCATKIN_ENABLE_TESTING=OFF
+      -DCMAKE_INSTALL_PREFIX=/opt/ros/melodic \
+      -DCATKIN_ENABLE_TESTING=ON
 
     /workspace/repo/.xgc2/scripts/package_debs.sh \
       --install-root /workspace/work/install-root \
       --output-dir /workspace/out
 
     if [[ "${INSTALL_CHECK}" == "true" ]]; then
-      apt-get install -y /workspace/out/ros-noetic-xgc2-scout-description_*.deb
+      apt-get install -y /workspace/out/ros-melodic-xgc2-scout-description_*.deb
       /workspace/repo/.xgc2/scripts/check_installed_packages.sh
+      diff -qr /workspace/repo/meshes /opt/ros/melodic/share/scout_description/meshes
+      cmp /workspace/repo/urdf/scout_visual.urdf \
+        /opt/ros/melodic/share/scout_description/urdf/scout_visual.urdf
     fi
   '
 

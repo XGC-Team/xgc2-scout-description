@@ -1,29 +1,29 @@
 schema: xgc2.product.v1
-id: xgc2-scout-description
-name: XGC2 Scout Description
-version: 0.4.10-14
+id: xgc2-ros-melodic-scout-description
+name: XGC2 ROS Melodic Scout Description
+version: 0.4.10-1
 kind: ros1-apt
-summary: ROS Noetic visual-only AgileX Scout meshes and URDF.
+summary: ROS Melodic visual-only AgileX Scout meshes and URDF.
 ros:
-  distro: noetic
+  distro: melodic
   packages:
   - scout_description
 apt:
-  distribution: focal
+  distribution: bionic
   install:
-  - ros-noetic-xgc2-scout-description
+  - ros-melodic-xgc2-scout-description
   packages:
-  - ros-noetic-xgc2-scout-description
+  - ros-melodic-xgc2-scout-description
   package_architectures:
-    ros-noetic-xgc2-scout-description:
+    ros-melodic-xgc2-scout-description:
     - amd64
     - arm64
   depends:
-  - ros-noetic-urdf
+  - ros-melodic-urdf
 usage:
   install: 'sudo apt update
 
-    sudo apt install ros-noetic-xgc2-scout-description
+    sudo apt install ros-melodic-xgc2-scout-description
 
     '
   smoke_test: 'test -f "$(rospack find scout_description)/urdf/scout_visual.urdf"
@@ -33,11 +33,11 @@ usage:
     '
 ownership:
   paths:
-  - /opt/ros/noetic/share/scout_description
+  - /opt/ros/melodic/share/scout_description
 release:
   repository: lxk36/xgc2-scout-description
-  ref: noetic
+  ref: melodic
   workflow: release.yml
   ci_workflow: ci.yml
   apt_versions:
-    focal: 0.4.10-14
+    bionic: 0.4.10-1
