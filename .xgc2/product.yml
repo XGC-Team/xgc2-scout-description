@@ -35,7 +35,7 @@ ownership:
   paths:
   - /opt/ros/noetic/share/scout_description
 release:
-  repository: lxk36/xgc2-scout-description
+  repository: XGC-Team/xgc2-scout-description
   ref: noetic
   workflow: release.yml
   ci_workflow: ci.yml
