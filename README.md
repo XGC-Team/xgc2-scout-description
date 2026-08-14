@@ -1,17 +1,17 @@
 # scout_description
 
-Visual-only AgileX Scout model shared by ROS visualizers and simulation packages.
+AgileX Scout model shared by Melodic onboard TF, ROS visualizers, and simulation.
 
 This branch targets ROS Melodic on Ubuntu Bionic and builds with `catkin`.
 
-The ROS package name is permanently `scout_description`. Its public runtime
-contract is limited to:
+The ROS package name is permanently `scout_description`. Runtime files:
 
-- `meshes/`
-- `urdf/scout_visual.urdf`
+- `meshes/` — hashed viewer assets stay byte-identical; vehicle-only meshes
+  (`base_link.dae`, `wheel_type1.dae`, `wheel_type2.dae`, …) are additive
+- `urdf/scout_visual.urdf` — existing visualizers and Gazebo mesh URIs
+- `urdf/scout_v2.xacro` — Xavier chassis TF used by the AgileX onboard stack
 
-Gazebo plugins, transmissions, inertial/collision geometry, launch files, sensor
-configuration, and RViz scenario layouts belong to their consuming packages.
-The XGC2 Gazebo Classic consumer owns those files in `gazebo_sim_scout` while
-continuing to resolve visual meshes through
+Bringup launch, RViz layouts, maps, and Gazebo physics stay out of this package.
+The onboard compose launch lives in `agilex_onboard_autostart`. Gazebo Classic
+owns its own xacro in `gazebo_sim_scout` and only resolves
 `package://scout_description/meshes/...`.

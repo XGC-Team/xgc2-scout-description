@@ -18,13 +18,12 @@ VIEWER_VISUAL_ASSET_SHA256 = {
 
 
 class ScoutVisualAssetsTest(unittest.TestCase):
-    def test_repository_boundary_is_visual_only(self) -> None:
+    def test_repository_boundary_keeps_visual_and_vehicle_models(self) -> None:
         self.assertFalse((PACKAGE / "launch").exists())
         self.assertFalse((PACKAGE / "rviz").exists())
-        self.assertEqual(
-            [path.name for path in sorted((PACKAGE / "urdf").iterdir())],
-            ["scout_visual.urdf"],
-        )
+        urdf_names = [path.name for path in sorted((PACKAGE / "urdf").iterdir()) if path.is_file()]
+        self.assertIn("scout_visual.urdf", urdf_names)
+        self.assertIn("scout_v2.xacro", urdf_names)
 
     def test_visual_urdf_has_no_simulation_or_physics_elements(self) -> None:
         path = PACKAGE / "urdf" / "scout_visual.urdf"
