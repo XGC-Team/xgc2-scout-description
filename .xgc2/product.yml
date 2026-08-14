@@ -37,7 +37,7 @@ ownership:
   paths:
   - /opt/ros/melodic/share/scout_description
 release:
-  repository: lxk36/xgc2-scout-description
+  repository: XGC-Team/xgc2-scout-description
   ref: melodic
   workflow: release.yml
   ci_workflow: ci.yml
