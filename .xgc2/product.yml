@@ -38,7 +38,7 @@ ownership:
   - /opt/ros/jazzy/share/scout_description
   - /opt/ros/jazzy/share/ament_index/resource_index/packages/scout_description
 release:
-  repository: lxk36/xgc2-scout-description
+  repository: XGC-Team/xgc2-scout-description
   ref: jazzy
   workflow: release.yml
   ci_workflow: ci.yml
