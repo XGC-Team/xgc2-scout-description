@@ -72,6 +72,9 @@ Priority: optional
 Architecture: ${ARCH}
 Maintainer: XGC2 <apt@example.com>
 Depends: ros-${ROS_DISTRO}-urdf
+Conflicts: ros-${ROS_DISTRO}-xgc2-agilex-scout-description
+Replaces: ros-${ROS_DISTRO}-xgc2-agilex-scout-description
+Provides: ros-${ROS_DISTRO}-xgc2-agilex-scout-description
 Description: XGC2 Scout visual-only description assets
 EOF
 
