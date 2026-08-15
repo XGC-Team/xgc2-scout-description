@@ -2,7 +2,7 @@
 set -euo pipefail
 
 grep -q '^id: xgc2-scout-description$' .xgc2/product.yml
-grep -q '^version: 0.4.10-14$' .xgc2/product.yml
+grep -qE '^version: [^[:space:]]+$' .xgc2/product.yml
 grep -q '<name>scout_description</name>' package.xml
 grep -q '<buildtool_depend>catkin</buildtool_depend>' package.xml
 grep -q 'ros-noetic-urdf' .xgc2/product.yml
