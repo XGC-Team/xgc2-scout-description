@@ -4,7 +4,7 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "${SCRIPT_DIR}/../.." && pwd)"
 
-DOCKER_IMAGE="${DOCKER_IMAGE:-ros:melodic-ros-base-bionic}"
+DOCKER_IMAGE="${DOCKER_IMAGE:-ghcr.io/xgc-team/xgc2-images/xgc2-build-bionic-ros-melodic:1.0.0}"
 WORK_DIR="${WORK_DIR:-${REPO_ROOT}/.work/docker}"
 OUTPUT_DIR="${OUTPUT_DIR:-${REPO_ROOT}/debs}"
 INSTALL_CHECK="${INSTALL_CHECK:-true}"
@@ -37,7 +37,9 @@ done
 mkdir -p "${WORK_DIR}" "${OUTPUT_DIR}"
 
 docker pull "${DOCKER_IMAGE}"
-docker run --rm \
+docker run --rm --network none \
+  -e XGC2_BUILD_GID="$(id -g)" \
+  -e XGC2_BUILD_UID="$(id -u)" \
   -e XGC2_APT_OVERLAY_URL="${XGC2_APT_OVERLAY_URL:-}" \
   -e DEBIAN_FRONTEND=noninteractive \
   -e INSTALL_CHECK="${INSTALL_CHECK}" \
@@ -47,27 +49,29 @@ docker run --rm \
   "${DOCKER_IMAGE}" \
   bash -lc '
     set -euo pipefail
+    trap '\''build_status=$?; chown -R "${XGC2_BUILD_UID}:${XGC2_BUILD_GID}" /workspace/work /workspace/out; exit "${build_status}"'\'' EXIT
 
     export DEBIAN_FRONTEND=noninteractive
-    apt-get update
-    apt-get install -y --no-install-recommends \
-      build-essential \
-      cmake \
-      dpkg-dev \
-      fakeroot \
-      file \
-      git \
-      python3 \
-      rsync \
-      ros-melodic-rospack \
-      ros-melodic-urdf
+    for pkg in \
+      build-essential cmake dpkg-dev fakeroot file git python3 rsync \
+      ros-melodic-rospack ros-melodic-urdf
+    do
+      if ! dpkg -s "${pkg}" >/dev/null 2>&1; then
+        echo "image is missing ${pkg}; use xgc2-build-bionic-ros-melodic" >&2
+        exit 1
+      fi
+    done
 
     rm -rf /workspace/work/src /workspace/work/build /workspace/work/devel /workspace/work/install-root
     mkdir -p /workspace/work/src/scout_description
-    rsync -a --delete /workspace/repo/ /workspace/work/src/scout_description/
+    rsync -a --delete \
+      --exclude .git --exclude .work --exclude debs \
+      /workspace/repo/ /workspace/work/src/scout_description/
 
     cd /workspace/work
+    set +u
     source /opt/ros/melodic/setup.bash
+    set -u
     catkin_make \
       -DCMAKE_INSTALL_PREFIX=/opt/ros/melodic \
       -DCATKIN_ENABLE_TESTING=ON
@@ -81,7 +85,7 @@ docker run --rm \
       --output-dir /workspace/out
 
     if [[ "${INSTALL_CHECK}" == "true" ]]; then
-      apt-get install -y /workspace/out/ros-melodic-xgc2-scout-description_*.deb
+      dpkg -i /workspace/out/ros-melodic-xgc2-scout-description_*.deb
       /workspace/repo/.xgc2/scripts/check_installed_packages.sh
       diff -qr /workspace/repo/meshes /opt/ros/melodic/share/scout_description/meshes
       cmp /workspace/repo/urdf/scout_visual.urdf \

@@ -12,6 +12,7 @@ defaults:
 jobs:
   compliance:
     runs-on: ubuntu-latest
+    container: ghcr.io/xgc-team/xgc2-images/xgc2-build-bionic-dev:1.0.0
     steps:
       - uses: actions/checkout@v4
         with:
