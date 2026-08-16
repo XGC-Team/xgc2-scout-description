@@ -1,7 +1,7 @@
 schema: xgc2.product.v1
 id: xgc2-ros-jazzy-scout-description
 name: XGC2 ROS Jazzy Scout Description
-version: 0.4.10-1
+version: 0.4.10-2
 kind: ros2-apt
 summary: ROS 2 Jazzy visual-only AgileX Scout meshes and URDF.
 ros:
@@ -43,4 +43,4 @@ release:
   workflow: release.yml
   ci_workflow: ci.yml
   apt_versions:
-    noble: 0.4.10-1
+    noble: 0.4.10-2
