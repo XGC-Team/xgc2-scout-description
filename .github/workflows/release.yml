@@ -91,7 +91,6 @@ jobs:
   release-checks:
     needs: validate-release-inputs
     runs-on: ubuntu-latest
-    container: ghcr.io/xgc-team/xgc2-images/xgc2-build-bionic-dev:1.0.0
     steps:
       - uses: actions/checkout@v4
         with:
@@ -101,7 +100,13 @@ jobs:
         run: |
           set -euo pipefail
           git diff --check HEAD
-          .xgc2/scripts/check_package_compliance.sh
+          image=ghcr.io/xgc-team/xgc2-images/xgc2-build-bionic-dev:1.0.0
+          docker pull "$image"
+          docker run --rm --network none \
+            -v "$GITHUB_WORKSPACE:/workspace:ro" \
+            -w /workspace \
+            "$image" \
+            bash -lc '.xgc2/scripts/check_package_compliance.sh'
 
   build-debs:
     needs:
