@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "release_visual": "lod10k",
+  "variants": {
+    "reference": {
+      "role": "upstream_cad",
+      "files": [
+        "meshes/scout_mini_base_link2.dae",
+        "meshes/wheel.dae",
+        "meshes/box_link.STL"
+      ],
+      "vehicle_triangles": 747538
+    },
+    "lod10k": {
+      "role": "default_visual",
+      "urdf": "urdf/scout_visual_lod10k.urdf",
+      "vehicle_triangles": 9983
+    },
+    "detail": {
+      "role": "close_range_visual",
+      "urdf": "urdf/scout_visual_detail.urdf",
+      "vehicle_triangles": 48509
+    }
+  },
+  "physics": "Owned by the simulation package; visual selection must not modify collision, inertia, contact or sensor contracts."
+}

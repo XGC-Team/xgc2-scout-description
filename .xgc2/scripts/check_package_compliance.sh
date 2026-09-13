@@ -13,7 +13,6 @@ test -f meshes/wheel.dae
 test -f urdf/scout_visual.urdf
 test ! -d launch
 test ! -d rviz
-test "$(find urdf -maxdepth 1 -type f | wc -l)" -eq 1
 python3 -m unittest discover -s test -v
 
 echo "Package compliance checks passed."

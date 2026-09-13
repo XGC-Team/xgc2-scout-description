@@ -1,0 +1,631 @@
+{
+  "source_assets": {
+    "scout_mini_base_link2.dae": {
+      "sha256": "3db98aba69d8ba26e1c2177646ba2a12c6725ff9dc99efe06cf4d2be87f23204",
+      "bytes": 14667749
+    },
+    "wheel.dae": {
+      "sha256": "c64ae34e44118f07d718d54199107ce430a006d1cd9fd96bb80968954b5a8ce7",
+      "bytes": 2775868
+    },
+    "box_link.STL": {
+      "sha256": "033cd0ce9f4661576e3ba42fdabb3fd2d630c472d6057ae421793090638b6ec3",
+      "bytes": 19918184
+    }
+  },
+  "parts": {
+    "body": {
+      "source_triangles": 193648,
+      "removed_duplicate_degenerate_or_stray_triangles": 17,
+      "omitted_internal_components": 0,
+      "omitted_internal_triangles": 0,
+      "triangles": 18366,
+      "materials": 4,
+      "bounds_m": [
+        [
+          -0.19489037990570068,
+          -0.11318150162696838,
+          -0.2980472445487976
+        ],
+        [
+          0.1946636289358139,
+          0.06893633306026459,
+          0.2626568377017975
+        ]
+      ],
+      "retained_sampled_surface_deviation": {
+        "samples": 25877,
+        "max_m": 0.0021913053933531046,
+        "p99_m": 0.0007139801839366537
+      },
+      "components": [
+        {
+          "source": "geometry0",
+          "action": "retained",
+          "source_triangles": 264,
+          "triangles": 62
+        },
+        {
+          "source": "geometry1",
+          "action": "retained",
+          "source_triangles": 96,
+          "triangles": 12
+        },
+        {
+          "source": "geometry2",
+          "action": "retained",
+          "source_triangles": 11434,
+          "triangles": 684
+        },
+        {
+          "source": "geometry3",
+          "action": "retained",
+          "source_triangles": 532,
+          "triangles": 62
+        },
+        {
+          "source": "geometry4",
+          "action": "retained",
+          "source_triangles": 6975,
+          "triangles": 418
+        },
+        {
+          "source": "geometry5",
+          "action": "retained",
+          "source_triangles": 520,
+          "triangles": 60
+        },
+        {
+          "source": "geometry6",
+          "action": "retained",
+          "source_triangles": 6036,
+          "triangles": 1446
+        },
+        {
+          "source": "geometry7",
+          "action": "retained",
+          "source_triangles": 2272,
+          "triangles": 128
+        },
+        {
+          "source": "geometry8",
+          "action": "retained",
+          "source_triangles": 808,
+          "triangles": 96
+        },
+        {
+          "source": "geometry9",
+          "action": "retained",
+          "source_triangles": 2446,
+          "triangles": 146
+        },
+        {
+          "source": "geometry10",
+          "action": "retained",
+          "source_triangles": 1800,
+          "triangles": 432
+        },
+        {
+          "source": "geometry11",
+          "action": "retained",
+          "source_triangles": 1052,
+          "triangles": 126
+        },
+        {
+          "source": "geometry12",
+          "action": "retained",
+          "source_triangles": 312,
+          "triangles": 36
+        },
+        {
+          "source": "geometry13",
+          "action": "retained",
+          "source_triangles": 772,
+          "triangles": 184
+        },
+        {
+          "source": "geometry14",
+          "action": "retained",
+          "source_triangles": 1052,
+          "triangles": 62
+        },
+        {
+          "source": "geometry15",
+          "action": "retained",
+          "source_triangles": 11428,
+          "triangles": 684
+        },
+        {
+          "source": "geometry16",
+          "action": "retained",
+          "source_triangles": 156,
+          "triangles": 12
+        },
+        {
+          "source": "geometry17",
+          "action": "retained",
+          "source_triangles": 1346,
+          "triangles": 80
+        },
+        {
+          "source": "geometry18",
+          "action": "retained",
+          "source_triangles": 7049,
+          "triangles": 422
+        },
+        {
+          "source": "geometry19",
+          "action": "retained",
+          "source_triangles": 156,
+          "triangles": 12
+        },
+        {
+          "source": "geometry20",
+          "action": "retained",
+          "source_triangles": 1340,
+          "triangles": 80
+        },
+        {
+          "source": "geometry21",
+          "action": "retained",
+          "source_triangles": 312,
+          "triangles": 36
+        },
+        {
+          "source": "geometry22",
+          "action": "retained",
+          "source_triangles": 772,
+          "triangles": 184
+        },
+        {
+          "source": "geometry23",
+          "action": "retained",
+          "source_triangles": 9412,
+          "triangles": 564
+        },
+        {
+          "source": "geometry24",
+          "action": "retained",
+          "source_triangles": 1348,
+          "triangles": 80
+        },
+        {
+          "source": "geometry25",
+          "action": "retained",
+          "source_triangles": 21990,
+          "triangles": 2631
+        },
+        {
+          "source": "geometry26",
+          "action": "retained",
+          "source_triangles": 9412,
+          "triangles": 563
+        },
+        {
+          "source": "geometry27",
+          "action": "retained",
+          "source_triangles": 772,
+          "triangles": 184
+        },
+        {
+          "source": "geometry28",
+          "action": "retained",
+          "source_triangles": 7327,
+          "triangles": 438
+        },
+        {
+          "source": "geometry29",
+          "action": "retained",
+          "source_triangles": 12,
+          "triangles": 12
+        },
+        {
+          "source": "geometry30",
+          "action": "retained",
+          "source_triangles": 12,
+          "triangles": 12
+        },
+        {
+          "source": "geometry31",
+          "action": "retained",
+          "source_triangles": 12,
+          "triangles": 12
+        },
+        {
+          "source": "geometry32",
+          "action": "retained",
+          "source_triangles": 12,
+          "triangles": 12
+        },
+        {
+          "source": "geometry33",
+          "action": "retained",
+          "source_triangles": 96,
+          "triangles": 12
+        },
+        {
+          "source": "geometry34",
+          "action": "retained",
+          "source_triangles": 772,
+          "triangles": 184
+        },
+        {
+          "source": "geometry35",
+          "action": "retained",
+          "source_triangles": 3172,
+          "triangles": 188
+        },
+        {
+          "source": "geometry36",
+          "action": "retained",
+          "source_triangles": 1346,
+          "triangles": 80
+        },
+        {
+          "source": "geometry37",
+          "action": "retained",
+          "source_triangles": 1052,
+          "triangles": 62
+        },
+        {
+          "source": "geometry38",
+          "action": "retained",
+          "source_triangles": 1340,
+          "triangles": 80
+        },
+        {
+          "source": "geometry39",
+          "action": "retained",
+          "source_triangles": 312,
+          "triangles": 36
+        },
+        {
+          "source": "geometry40",
+          "action": "retained",
+          "source_triangles": 1340,
+          "triangles": 80
+        },
+        {
+          "source": "geometry41",
+          "action": "retained",
+          "source_triangles": 30256,
+          "triangles": 3622
+        },
+        {
+          "source": "geometry42",
+          "action": "retained",
+          "source_triangles": 156,
+          "triangles": 12
+        },
+        {
+          "source": "geometry43",
+          "action": "retained",
+          "source_triangles": 312,
+          "triangles": 36
+        },
+        {
+          "source": "geometry44",
+          "action": "retained",
+          "source_triangles": 1052,
+          "triangles": 62
+        },
+        {
+          "source": "geometry45",
+          "action": "retained",
+          "source_triangles": 1348,
+          "triangles": 80
+        },
+        {
+          "source": "geometry46",
+          "action": "retained",
+          "source_triangles": 156,
+          "triangles": 12
+        },
+        {
+          "source": "geometry47",
+          "action": "retained",
+          "source_triangles": 9412,
+          "triangles": 564
+        },
+        {
+          "source": "geometry48",
+          "action": "retained",
+          "source_triangles": 6960,
+          "triangles": 1670
+        },
+        {
+          "source": "geometry49",
+          "action": "retained",
+          "source_triangles": 11434,
+          "triangles": 684
+        },
+        {
+          "source": "geometry50",
+          "action": "retained",
+          "source_triangles": 808,
+          "triangles": 96
+        },
+        {
+          "source": "geometry51",
+          "action": "retained",
+          "source_triangles": 300,
+          "triangles": 70
+        },
+        {
+          "source": "geometry52",
+          "action": "retained",
+          "source_triangles": 1340,
+          "triangles": 80
+        },
+        {
+          "source": "geometry53",
+          "action": "retained",
+          "source_triangles": 11428,
+          "triangles": 684
+        }
+      ]
+    },
+    "wheel": {
+      "source_triangles": 38882,
+      "removed_duplicate_degenerate_or_stray_triangles": 0,
+      "omitted_internal_components": 0,
+      "omitted_internal_triangles": 0,
+      "triangles": 4924,
+      "materials": 3,
+      "bounds_m": [
+        [
+          -0.07962973415851593,
+          -0.08115340769290924,
+          -0.04699498042464256
+        ],
+        [
+          0.07979865372180939,
+          0.0781208723783493,
+          0.085005022585392
+        ]
+      ],
+      "retained_sampled_surface_deviation": {
+        "samples": 25291,
+        "max_m": 0.0019323847955092788,
+        "p99_m": 0.0013855449273250994
+      },
+      "components": [
+        {
+          "source": "geometry0",
+          "action": "retained",
+          "source_triangles": 2948,
+          "triangles": 816
+        },
+        {
+          "source": "geometry1",
+          "action": "retained",
+          "source_triangles": 2344,
+          "triangles": 656
+        },
+        {
+          "source": "geometry2",
+          "action": "retained",
+          "source_triangles": 5804,
+          "triangles": 406
+        },
+        {
+          "source": "geometry3",
+          "action": "retained",
+          "source_triangles": 8908,
+          "triangles": 622
+        },
+        {
+          "source": "geometry4",
+          "action": "retained",
+          "source_triangles": 12414,
+          "triangles": 1736
+        },
+        {
+          "source": "geometry5",
+          "action": "retained",
+          "source_triangles": 208,
+          "triangles": 116
+        },
+        {
+          "source": "geometry6",
+          "action": "internal_hub",
+          "source_triangles": 6256,
+          "triangles": 572
+        }
+      ]
+    },
+    "payload": {
+      "source_triangles": 398362,
+      "removed_duplicate_degenerate_or_stray_triangles": 772,
+      "omitted_internal_components": 1307,
+      "omitted_internal_triangles": 330426,
+      "triangles": 10447,
+      "materials": 4,
+      "bounds_m": [
+        [
+          -0.1730014532804489,
+          -0.1378767341375351,
+          0.007000001147389412
+        ],
+        [
+          0.21964594721794128,
+          0.13547605276107788,
+          0.30079999566078186
+        ]
+      ],
+      "retained_sampled_surface_deviation": {
+        "samples": 25955,
+        "max_m": 0.0014997959369793534,
+        "p99_m": 0.0004457836347864941
+      },
+      "components": [
+        {
+          "source": "box_link_0",
+          "action": "equipment_cover",
+          "source_triangles": 8794,
+          "triangles": 44
+        },
+        {
+          "source": "box_link_1",
+          "action": "retained",
+          "source_triangles": 936,
+          "triangles": 92
+        },
+        {
+          "source": "box_link_2",
+          "action": "retained",
+          "source_triangles": 9528,
+          "triangles": 1887
+        },
+        {
+          "source": "box_link_3",
+          "action": "retained",
+          "source_triangles": 944,
+          "triangles": 328
+        },
+        {
+          "source": "box_link_4",
+          "action": "retained",
+          "source_triangles": 244,
+          "triangles": 24
+        },
+        {
+          "source": "box_link_5",
+          "action": "equipment_cover",
+          "source_triangles": 4272,
+          "triangles": 44
+        },
+        {
+          "source": "box_link_6",
+          "action": "equipment_cover",
+          "source_triangles": 334,
+          "triangles": 44
+        },
+        {
+          "source": "box_link_7",
+          "action": "equipment_cover",
+          "source_triangles": 3052,
+          "triangles": 44
+        },
+        {
+          "source": "box_link_10",
+          "action": "equipment_cover",
+          "source_triangles": 1776,
+          "triangles": 44
+        },
+        {
+          "source": "box_link_12",
+          "action": "retained",
+          "source_triangles": 244,
+          "triangles": 24
+        },
+        {
+          "source": "box_link_13",
+          "action": "equipment_cover",
+          "source_triangles": 4272,
+          "triangles": 44
+        },
+        {
+          "source": "box_link_15",
+          "action": "equipment_cover",
+          "source_triangles": 2228,
+          "triangles": 44
+        },
+        {
+          "source": "box_link_17",
+          "action": "scan_housing",
+          "source_triangles": 6082,
+          "triangles": 1020
+        },
+        {
+          "source": "box_link_26",
+          "action": "retained",
+          "source_triangles": 72,
+          "triangles": 22
+        },
+        {
+          "source": "box_link_1316",
+          "action": "equipment_cover",
+          "source_triangles": 1382,
+          "triangles": 44
+        },
+        {
+          "source": "box_link_1319",
+          "action": "equipment_cover",
+          "source_triangles": 1886,
+          "triangles": 44
+        },
+        {
+          "source": "box_link_1320",
+          "action": "retained",
+          "source_triangles": 200,
+          "triangles": 20
+        },
+        {
+          "source": "box_link_1321",
+          "action": "retained",
+          "source_triangles": 200,
+          "triangles": 40
+        },
+        {
+          "source": "box_link_1322",
+          "action": "retained",
+          "source_triangles": 200,
+          "triangles": 40
+        },
+        {
+          "source": "box_link_1323",
+          "action": "retained",
+          "source_triangles": 200,
+          "triangles": 40
+        },
+        {
+          "source": "box_link_1328",
+          "action": "retained",
+          "source_triangles": 1068,
+          "triangles": 414
+        },
+        {
+          "source": "box_link_1329",
+          "action": "retained",
+          "source_triangles": 732,
+          "triangles": 292
+        },
+        {
+          "source": "box_link_1330",
+          "action": "retained",
+          "source_triangles": 8388,
+          "triangles": 2626
+        },
+        {
+          "source": "box_link_1331",
+          "action": "retained",
+          "source_triangles": 340,
+          "triangles": 136
+        },
+        {
+          "source": "box_link_1332",
+          "action": "retained",
+          "source_triangles": 2610,
+          "triangles": 492
+        },
+        {
+          "source": "box_link_1333",
+          "action": "retained",
+          "source_triangles": 512,
+          "triangles": 204
+        },
+        {
+          "source": "box_link_1334",
+          "action": "retained",
+          "source_triangles": 6668,
+          "triangles": 2350
+        }
+      ]
+    }
+  },
+  "units": "metres",
+  "vehicle_triangles": 48509,
+  "source_vehicle_triangles": 747538,
+  "deviation_scope": "Retained CAD surfaces only; semantic equipment covers, axle and lidar replacements are recorded separately."
+}

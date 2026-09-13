@@ -11,6 +11,8 @@ if(CATKIN_ENABLE_TESTING)
     NAME scout_visual_assets
     COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/test/test_visual_assets.py
   )
+  add_test(NAME scout_reduced_assets
+    COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/test/test_reduced_assets.py)
 endif()
 
 install(
@@ -21,4 +23,8 @@ install(
 install(
   FILES LICENSE MODEL_ASSET_NOTICE.md README.md CHANGELOG.rst
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
+)
+
+install(FILES modeling/visual_variants.json
+  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/modeling
 )
