@@ -20,7 +20,27 @@
       "role": "close_range_visual",
       "urdf": "urdf/scout_visual_detail.urdf",
       "vehicle_triangles": 48509
+    },
+    "lod_medium": {
+      "role": "lod_medium",
+      "status": "component_comparison_complete_runtime_acceptance_pending",
+      "urdf": "urdf/scout_visual_lod_medium.urdf",
+      "vehicle_triangles": 5019,
+      "nominal_vehicle_triangle_budget": 5000
+    },
+    "lod1500": {
+      "role": "lod_low",
+      "status": "component_comparison_complete_runtime_acceptance_pending",
+      "urdf": "urdf/scout_visual_lod1500.urdf",
+      "vehicle_triangles": 1496,
+      "nominal_vehicle_triangle_budget": 1500,
+      "hard_vehicle_triangle_cap": 1500
     }
   },
-  "physics": "Owned by the simulation package; visual selection must not modify collision, inertia, contact or sensor contracts."
+  "physics": "Owned by the simulation package; visual selection must not modify collision, inertia, contact or sensor contracts.",
+  "lod_tiers": {
+    "high": "lod10k",
+    "medium": "lod_medium",
+    "low": "lod1500"
+  }
 }
